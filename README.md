@@ -70,27 +70,3 @@ wget https://bj.bcebos.com/v1/paddledet/data/coco/image_info_unlabeled2017.zip
 # 下载转换完的 unlabeled2017 无标注json文件
 wget https://bj.bcebos.com/v1/paddledet/data/coco/instances_unlabeled2017.zip
 ```
-
-如果需要用到COCO全量unlabeled无标注数据集，需要将原版的`image_info_unlabeled2017.json`进行格式转换，运行以下代码:
-
-<details>
-<summary> COCO unlabeled 标注转换代码：</summary>
-
-```python
-import json
-anns_train = json.load(open('annotations/instances_train2017.json', 'r'))
-anns_unlabeled = json.load(open('annotations/image_info_unlabeled2017.json', 'r'))
-unlabeled_json = {
-  'images': anns_unlabeled['images'],
-  'annotations': [],
-  'categories': anns_train['categories'],
-}
-path = 'annotations/instances_unlabeled2017.json'
-with open(path, 'w') as f:
-  json.dump(unlabeled_json, f)
-```
-
-</details>
-
-
-<details open>
